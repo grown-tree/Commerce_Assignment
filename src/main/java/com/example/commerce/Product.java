@@ -31,6 +31,10 @@ public class Product {
     }
 
     public void setPrice(int price) {
+        if (price < 0) {//음수예외처리
+            System.out.println("가격은 0원 이상이어야 합니다.");
+            return;
+        }
         this.price = price;
     }
 
@@ -47,6 +51,10 @@ public class Product {
     }
 
     public void setStock(int stock) {
+        if (stock < 0) {//음수예외처리
+            System.out.println("재고는 0개 이상이어야 합니다.");
+            return;
+        }
         this.stock = stock;
     }
 

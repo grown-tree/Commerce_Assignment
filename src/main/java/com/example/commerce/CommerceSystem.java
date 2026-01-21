@@ -8,14 +8,13 @@ public class CommerceSystem {
 
     private int menu = -1;
 
-    Category category = new Category();
-    List<String> categories = category.getCategoryName();
-    Scanner sc = new Scanner(System.in);
+    private Category category = new Category();
+    private List<String> categories = category.getCategoryName();
+    private Scanner sc = new Scanner(System.in);
 
     public CommerceSystem() {}
 
     public void start (){
-
 
         System.out.println("start 함수 시작");
 
@@ -84,15 +83,5 @@ public class CommerceSystem {
             }
         }
     }
-
-    public int getMenu() {
-        return menu;
-    }
-
-    public void setMenu(int menu) {
-        this.menu = menu;
-    }
-
-
 
 }

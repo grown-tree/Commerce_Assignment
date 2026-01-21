@@ -1,15 +1,11 @@
 package com.example.commerce;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
 
         CommerceSystem commerceSystem = new CommerceSystem();
 
         commerceSystem.start();
-
 
     }
 }
