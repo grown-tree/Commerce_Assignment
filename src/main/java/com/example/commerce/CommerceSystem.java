@@ -16,8 +16,6 @@ public class CommerceSystem {
 
     public void start (){
 
-        System.out.println("start 함수 시작");
-
         while (menu!=0) {
             System.out.println("[ 실시간 커머스 플랫폼 메인 ]");
 

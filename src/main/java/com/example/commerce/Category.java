@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Category {
 
-    private List<String> categoryName = List.of("전자제품","의류","식품");
+    private List<String> categoryName = new ArrayList<>(List.of("전자제품","의류","식품"));
     private List<Product> products = new ArrayList<>();
 
     public Category() {
