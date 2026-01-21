@@ -2,25 +2,28 @@ package com.example.commerce;
 
 public class Product {
 
-    //상품명, 가격, 설명, 재고수량
-    private String name;
+    //상품명, 가격, 설명, 재고수량, 카테고리
+    private String productName;
     private int price;
     private String desc;
     private int stock;
+    private String productCategory;
 
-    public Product(String name, int price, String desc, int stock) {
-        this.name = name;
+
+    public Product(String productName, int price, String desc, int stock, String productCategory) {
+        this.productName = productName;
         this.price = price;
         this.desc = desc;
         this.stock = stock;
+        this.productCategory = productCategory;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getPrice() {
@@ -47,8 +50,16 @@ public class Product {
         this.stock = stock;
     }
 
+    public String getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
+    }
+
     // 상품 정보 출력 포맷
     public String getProdInfo() {
-        return String.format("%-15s | %,10d원 | %s", name, price, desc);
+        return String.format("%-15s\t | %,10d원\t | %s", productName, price, desc);
     }
 }
