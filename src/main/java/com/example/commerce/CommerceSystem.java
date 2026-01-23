@@ -13,7 +13,7 @@ public class CommerceSystem {
     private List<String> categories = category.getCategoryName();
     private Scanner sc = new Scanner(System.in);
     private CartService cartService = new CartService();
-    private admin admin = new admin();
+    private admin admin = new admin(category);//카테고리객체를 넘겨줘서 생성된 상품들전달하기
 
     public CommerceSystem() {}
 
