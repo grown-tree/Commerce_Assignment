@@ -1,6 +1,7 @@
 package com.example.commerce;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,57 +13,68 @@ public class CommerceSystem {
     private List<String> categories = category.getCategoryName();
     private Scanner sc = new Scanner(System.in);
     private CartService cartService = new CartService();
+    private admin admin = new admin();
 
     public CommerceSystem() {}
 
     public void start (){
 
         while (menu!=0) {
-            System.out.println("[ 실시간 커머스 플랫폼 메인 ]");
+            try {
+                System.out.println("[ 실시간 커머스 플랫폼 메인 ]");
 
-            //List.of로 선언된 카테고리 출력
-            for (int i = 0; i < categories.size(); i++) {
-                System.out.println((i + 1) + ". " + categories.get(i));
-            }
-            List<Cart> carts = cartService.getCart();
-
-            if(carts.size() != 0 ){
-                System.out.println("[ 주문 관리 ]");
-                System.out.println("4. 장바구니 확인    | 장바구니를 확인 후 주문합니다.");
-                System.out.println("5. 주문 취소       | 진행중인 주문을 취소합니다.");
-            }
-
-            System.out.println("0. 종료            | 프로그램 종료");
-            System.out.print("입력: ");
-            menu = sc.nextInt();
-
-            if (menu == 0) {
-                System.out.println("커머스 플랫폼을 종료합니다.");
-                break;
-            }
-
-            if (menu > 0 && menu <= categories.size()) {
-                showCategoryDetail(categories.get(menu - 1));
-            }
-            else{
-                if (carts.size() != 0 && menu == 4){
-                    System.out.println("아래와 같이 주문 하시겠습니까?");
-                    cartService.checkCart();
-                    System.out.println("1. 주문 확정      2. 메인으로 돌아가기");
-
-                    int confirmMenu = sc.nextInt();
-
-                    if (confirmMenu == 1){
-                        cartService.confirmOrder();
-                    }else {
-                        System.out.println("메인메뉴로 돌아가기");
-
-                    }
-                } else if (menu ==5) {
-                    System.out.println("5번 주문 취소를 선택하셨습니다.");
-                }else {
-                    System.out.println("유효하지 않은 상품 번호 입력입니다.");
+                //List.of로 선언된 카테고리 출력
+                for (int i = 0; i < categories.size(); i++) {
+                    System.out.println((i + 1) + ". " + categories.get(i));
                 }
+                List<Cart> carts = cartService.getCart();
+
+                if (carts.size() != 0) {
+                    System.out.println("[ 주문 관리 ]");
+                    System.out.println("4. 장바구니 확인    | 장바구니를 확인 후 주문합니다.");
+                    System.out.println("5. 주문 취소       | 진행중인 주문을 취소합니다.");
+                }
+
+                System.out.println("6. ☆ 관리자 모드 ☆");
+                System.out.println("0. 종료            | 프로그램 종료");
+                System.out.print("입력: ");
+                menu = sc.nextInt();
+
+                //관리자모드
+                if (menu == 6) {
+                    admin.accessAdmin();
+                }
+
+                if (menu == 0) {
+                    System.out.println("커머스 플랫폼을 종료합니다.");
+                    break;
+                }
+
+                if (menu > 0 && menu <= categories.size()) {
+                    showCategoryDetail(categories.get(menu - 1));
+                } else {
+                    if (carts.size() != 0 && menu == 4) {
+                        System.out.println("아래와 같이 주문 하시겠습니까?");
+                        cartService.checkCart();
+                        System.out.println("1. 주문 확정      2. 메인으로 돌아가기");
+
+                        int confirmMenu = sc.nextInt();
+
+                        if (confirmMenu == 1) {
+                            cartService.confirmOrder();
+                        } else {
+                            System.out.println("메인메뉴로 돌아가기");
+                        }
+                    } else if (menu == 5) {
+                        System.out.println("5번 주문 취소를 선택하셨습니다.");
+                    } else {
+                        System.out.println("유효하지 않은 상품 번호 입력입니다.");
+                    }
+                }
+            }catch (InputMismatchException e) { //예외 처리
+                System.out.println("오류: 숫자만 입력할 수 있습니다. 다시 시도해주세요.");
+                sc.nextLine();
+                menu = -1;
             }
         }
         sc.close();
